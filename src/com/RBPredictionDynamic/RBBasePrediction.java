@@ -73,4 +73,15 @@ public class RBBasePrediction {
 		return groupTag;
 	}
 	
+	//衡量duplicateTag性能时用到
+	public Double obtainSimValue ( HashMap<String, Integer> queryReportTerms, HashMap<String, Integer> oldReportTerms ) {
+		SimilarityToolByReport simTool = new SimilarityToolByReport(  );
+		ArrayList<Double> queryEmbList = simTool.sentenceToVecNotConsiderFreq(termEmbList, queryReportTerms);
+		ArrayList<Double> oldEmbList = simTool.sentenceToVecNotConsiderFreq(termEmbList, oldReportTerms);
+		
+		Double simValue = simTool.cosineSimilarityForList( queryEmbList, oldEmbList );
+		
+		return simValue;
+	}
+	
 }
